@@ -1,0 +1,7 @@
+#Dependencias de Django
+Flask==1.1.2
+Flask-RESTful==0.3.8
+flask-marshmallow==0.14.0
+requests==2.25.1
+flake8==3.8.4
+black==20.8b1
