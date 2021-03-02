@@ -1,6 +1,4 @@
 import abc
-from collections import namedtuple
-
 from marshmallow import Schema, fields
 
 

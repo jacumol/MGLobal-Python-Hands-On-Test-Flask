@@ -1,6 +1,4 @@
-from flask import request
 from flask_restful import Resource
-import requests
 
 from employeeapi.utils import EmployeeDataGetter
 from employeeapi import employeeapi_api

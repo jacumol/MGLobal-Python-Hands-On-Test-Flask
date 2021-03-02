@@ -1,5 +1,5 @@
-from flask import abort, render_template
-from . import public_bp
+from flask import render_template
+from public import public_bp
 
 
 @public_bp.route("/")

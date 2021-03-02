@@ -1,13 +1,9 @@
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 import requests
 
-from employeeapi.schemas import (
-    EmployeeSchema,
-    HourlyContractEmployeeSchema,
-    MontlyContractEmployeeSchema,
-)
+from employeeapi.schemas import EmployeeSchema
 from app import create_app
 
 
@@ -76,30 +72,32 @@ class TestEmployeeList(unittest.TestCase):
 
         self.app = create_app()
         self.client = self.app.test_client()
-    
+
     @patch("employeeapi.utils.EmployeeDataGetter.get_api_data")
     def test_employee_list(self, get_api_data):
         data = [self.hourly_employee_dict, self.monthly_employee_dict]
         get_api_data.return_value = data
-        response = self.client.get('/api/employees/')
+        response = self.client.get("/api/employees/")
         self.assertEqual(response.status_code, 200)
         self.assertIsInstance(response.json, list)
         self.assertEqual(len(response.json), 2)
-    
+
     @patch("employeeapi.utils.EmployeeDataGetter.get_api_data")
     def test_employee_detail(self, get_api_data):
         data = [self.hourly_employee_dict, self.monthly_employee_dict]
         get_api_data.return_value = data
-        response = self.client.get('/api/employees/1/')
+        response = self.client.get("/api/employees/1/")
         self.assertEqual(response.status_code, 200)
         self.assertIsInstance(response.json, dict)
-        self.assertEqual(self.hourly_employee_dict["name"], response.json["name"])
+        self.assertEqual(
+            self.hourly_employee_dict["name"], response.json["name"]
+        )
 
     @patch("employeeapi.utils.EmployeeDataGetter.get_api_data")
     def test_unknown_employee_detail(self, get_api_data):
         data = [self.hourly_employee_dict, self.monthly_employee_dict]
         get_api_data.return_value = data
-        response = self.client.get('/api/employees/3/')
+        response = self.client.get("/api/employees/3/")
         self.assertEqual(response.status_code, 404)
 
     @patch("requests.get")
@@ -122,8 +120,6 @@ class TestEmployeeList(unittest.TestCase):
         response = self.client.get("/api/employees/")
         self.assertEqual(response.status_code, 503)
         self.assertEqual(response.json["message"], "Unknown error")
-    
-
 
 
 if __name__ == "__main__":
