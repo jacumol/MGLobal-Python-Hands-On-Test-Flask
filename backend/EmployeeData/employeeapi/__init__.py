@@ -7,4 +7,4 @@ employeeapi_bp = Blueprint(
 )
 employeeapi_api = Api(employeeapi_bp)
 
-from . import resources
+from employeeapi import resources

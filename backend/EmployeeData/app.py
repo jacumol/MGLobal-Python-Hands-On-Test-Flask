@@ -12,11 +12,11 @@ def create_app():
     app.config["ENV"] = "development"
 
     # Blueprints registers
-    app.register_blueprint(public_bp)
-    app.register_blueprint(employeeapi_bp)
+    app.register_blueprint(public_bp, url_prefix="/")
+    app.register_blueprint(employeeapi_bp, url_prefix="/api/")
     return app
 
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
